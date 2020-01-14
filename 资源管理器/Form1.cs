@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,7 @@ namespace 资源管理器
 
         private void LoadTreeView()
         {
+            this.treeView1.Nodes.Clear();
             LoadDataToTreeView(-1, this.treeView1.Nodes);
         }
 
@@ -80,7 +82,7 @@ namespace 资源管理器
 
             SqlParameter param = new SqlParameter("@id", SqlDbType.Int) { Value = id };
 
-            using (SqlDataReader reader = SqlHelper.ExecuteReader(sql,param))
+            using (SqlDataReader reader = SqlHelper.ExecuteReader(sql, param))
             {
                 if (reader.HasRows)
                 {
@@ -110,8 +112,8 @@ namespace 资源管理器
 
                 LoadContentByID(id);
             }
-            
-            
+
+
         }
 
         private void LoadContentByID(int id)
@@ -122,10 +124,79 @@ namespace 资源管理器
 
             object objContent = SqlHelper.ExecuteScalar(sql, param);
             string content = objContent == null ? string.Empty : objContent.ToString();
-            
+
             this.textBox1.Text = content;
         }
 
+        private void 文件ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //弹出对话框
+            Form2 form2 = new Form2(-1, LoadTreeView);
+            form2.Show();
+        }
+
+        private void 编辑ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //判断当前是否选中节点
+            if (this.treeView1.SelectedNode != null)
+            {
+                Form2 form2 = new Form2(Convert.ToInt32(this.treeView1.SelectedNode.Tag), LoadTreeView);
+                form2.Show();
+            }
+            else
+            {
+                MessageBox.Show("请选中类别");
+            }
+
+        }
+
+        private void 关于ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.treeView1.SelectedNode != null)
+            {
+                //获取选中类别的id
+                int pid = (int)this.treeView1.SelectedNode.Tag;
+                //设置文件选择器，打开对话框
+                this.openFileDialog1.Filter = "文本文件(*.txt)|*.txt";
+                DialogResult result = this.openFileDialog1.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    //获取所有选中文件的路径
+                    string[] path = this.openFileDialog1.FileNames;
+                    //循环插入所有选中的文本文件
+                    for (int i = 0; i < path.Length; i++)
+                    {
+                        //获取所有选中文件的文件名,不包含扩展名
+                        string name = Path.GetFileNameWithoutExtension(path[i]);
+                        //获取所有选中文件的内容
+                        string content = File.ReadAllText(path[i], Encoding.Default);
+                        //插入数据库
+                        AddContent(pid, name, content);
+
+                        //刷新listbox
+                        LoadNameByID(pid);
+
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("请选中类别");
+            }
+
+        }
+
+        private void AddContent(int pid, string name, string content)
+        {
+            string sql = "insert into ContentInfo (dTId,dName,dContent) values (@pid,@name,@content)";
+
+            SqlParameter[] parameters = new SqlParameter[]{
+              new SqlParameter("@pid",SqlDbType.Int)  {Value = pid},
+              new SqlParameter("@name",SqlDbType.NVarChar,100){Value=name},
+              new SqlParameter("@content",SqlDbType.NVarChar){Value=content}
+            };
+            SqlHelper.ExecuteNonQuery(sql, parameters);
+        }
 
     }
 }
