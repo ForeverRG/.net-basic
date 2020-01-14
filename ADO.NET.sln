@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "人物信息管理", "人�
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "省市递归", "省市递归\省市递归.csproj", "{B9CC2885-CFCA-49D8-A2A0-8797A5836F9F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "资源管理器", "资源管理器\资源管理器.csproj", "{7F7D11FB-7EE9-43DA-97C4-11035D7AC74B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{B9CC2885-CFCA-49D8-A2A0-8797A5836F9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9CC2885-CFCA-49D8-A2A0-8797A5836F9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9CC2885-CFCA-49D8-A2A0-8797A5836F9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F7D11FB-7EE9-43DA-97C4-11035D7AC74B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F7D11FB-7EE9-43DA-97C4-11035D7AC74B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F7D11FB-7EE9-43DA-97C4-11035D7AC74B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F7D11FB-7EE9-43DA-97C4-11035D7AC74B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
