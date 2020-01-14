@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "省市递归", "省市递�
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "资源管理器", "资源管理器\资源管理器.csproj", "{7F7D11FB-7EE9-43DA-97C4-11035D7AC74B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSet和DataTable", "DataSet和DataTable\DataSet和DataTable.csproj", "{2CF29223-EC14-4111-8F25-0C5AF5D725C2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{7F7D11FB-7EE9-43DA-97C4-11035D7AC74B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F7D11FB-7EE9-43DA-97C4-11035D7AC74B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F7D11FB-7EE9-43DA-97C4-11035D7AC74B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CF29223-EC14-4111-8F25-0C5AF5D725C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CF29223-EC14-4111-8F25-0C5AF5D725C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CF29223-EC14-4111-8F25-0C5AF5D725C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CF29223-EC14-4111-8F25-0C5AF5D725C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
