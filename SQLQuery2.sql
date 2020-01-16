@@ -1,3 +1,4 @@
+--
 SELECT * FROM TblStudent WHERE tSName like '%[%]%';
 
 SELECT top 100 * FROM TblStudent 
