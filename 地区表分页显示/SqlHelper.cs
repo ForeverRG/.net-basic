@@ -1,0 +1,120 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace 省市递归
+{
+    public static class SqlHelper
+    {
+        private static readonly string conStr = ConfigurationManager.ConnectionStrings["mssqlserver"].ConnectionString;
+
+        /// <summary>
+        /// 一般执行增删改
+        /// </summary>
+        /// <param name="sql">执行的sql语句</param>
+        /// <param name="parameters">绑定的参数</param>
+        /// <returns>返回影响行数</returns>
+        public static int ExecuteNonQuery(string sql, CommandType ct, params SqlParameter[] parameters)
+        { 
+            using (SqlConnection sqlConn = new SqlConnection(conStr))
+            {
+                using (SqlCommand sqlComm = new SqlCommand(sql, sqlConn))
+                {
+                    //设置执行的sql语句类型，是存储过程还是普通的sql语句
+                    sqlComm.CommandType = ct;
+
+                    if (parameters != null)
+                    {
+                        sqlComm.Parameters.AddRange(parameters);
+                    }
+                    sqlConn.Open();
+
+                    return sqlComm.ExecuteNonQuery();
+                }
+            }
+        }
+        /// <summary>
+        /// 一般执行具有单个返回值的sql语句
+        /// </summary>
+        /// <param name="sql">sql语句</param>
+        /// <param name="parameters">参数</param>
+        /// <returns>返回获取的单个结果</returns>
+        public static object ExecuteScalar(string sql, CommandType ct, params SqlParameter[] parameters)
+        {
+            using (SqlConnection sqlConn = new SqlConnection(conStr))
+            {
+                using (SqlCommand sqlComm = new SqlCommand(sql, sqlConn))
+                {
+                    sqlComm.CommandType = ct;
+
+                    if (parameters != null)
+                    {
+                        sqlComm.Parameters.AddRange(parameters);
+                    }
+                    sqlConn.Open();
+
+                    return sqlComm.ExecuteScalar();
+                }
+            }
+        }
+        /// <summary>
+        /// 一般执行查询结果集语句
+        /// </summary>
+        /// <param name="sql">SQL语句</param>
+        /// <param name="parameters">参数</param>
+        /// <returns>返回reader对象</returns>
+        public static SqlDataReader ExecuteReader(string sql, CommandType ct, params SqlParameter[] parameters)
+        {
+            SqlConnection sqlConn = new SqlConnection(conStr);
+
+            using (SqlCommand sqlComm = new SqlCommand(sql, sqlConn))
+            {
+                sqlComm.CommandType = ct;
+
+                if (parameters != null)
+                {
+                    sqlComm.Parameters.AddRange(parameters);
+                }
+                //执行查询若出错则关闭连接资源并且抛异常，否则资源一直被占用
+                try
+                {
+                    sqlConn.Open();
+                    return sqlComm.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
+                }
+                catch
+                {
+                    sqlConn.Close();
+                    sqlConn.Dispose();
+                    throw;
+                }
+            }
+        }
+        /// <summary>
+        /// 查询数据返回datatable
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public static DataTable ExecuteDataTable(string sql, CommandType ct, params SqlParameter[] parameters)
+        {
+            DataTable dt = new DataTable();
+            using (SqlDataAdapter adapter = new SqlDataAdapter(sql, conStr))
+            {
+                adapter.SelectCommand.CommandType = ct;
+
+                if (parameters != null)
+                {
+                    adapter.SelectCommand.Parameters.AddRange(parameters);
+                }
+                adapter.Fill(dt);
+            }
+            return dt;
+        }
+    }
+}
+
