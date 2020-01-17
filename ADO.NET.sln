@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "银行事务转账", "银�
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "查询字符串拼接", "查询字符串拼接\查询字符串拼接.csproj", "{58706AE2-C31F-486B-A090-B640476061F4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "日记系统", "日记系统\日记系统.csproj", "{78315658-F64C-4A13-B2DD-ABBE419BC902}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{58706AE2-C31F-486B-A090-B640476061F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58706AE2-C31F-486B-A090-B640476061F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58706AE2-C31F-486B-A090-B640476061F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78315658-F64C-4A13-B2DD-ABBE419BC902}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78315658-F64C-4A13-B2DD-ABBE419BC902}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78315658-F64C-4A13-B2DD-ABBE419BC902}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78315658-F64C-4A13-B2DD-ABBE419BC902}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
